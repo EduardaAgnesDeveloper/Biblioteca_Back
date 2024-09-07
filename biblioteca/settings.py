@@ -26,10 +26,11 @@ SECRET_KEY = 'django-insecure-51%05e2*phpmn9mj$epml3mk14rgrigvffc(g3#g0y^90ywv**
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['biblioteca-back.onrender.com']
+ALLOWED_HOSTS = ['biblioteca-back.onrender.com', '127.0.0.1']
 
 ALLOW_ALL_ORIGINS = True
 
+CORS_ALLOWED_ORIGINS = ['https://biblioteca-back.onrender.com']
 # Application definition
 
 INSTALLED_APPS = [
@@ -41,11 +42,13 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'livro',
     'usuarios'
+    'corsheaders'
 ]
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
