@@ -32,7 +32,9 @@ CORS_ALLOW_ALL_ORIGINS = True
 # CORS
 
 CORS_ALLOWED_ORIGINS = ['https://biblioteca-back.onrender.com']
-CORS_TRUSTED_ORIGINS = ['https://biblioteca-back.onrender.com']
+
+CSRF_TRUSTED_ORIGINS = ['https://biblioteca-back.onrender.com']
+
 CORS_ALLOW_METHODS = (
     "DELETE",
     "GET",
