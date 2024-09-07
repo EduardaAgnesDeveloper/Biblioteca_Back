@@ -102,11 +102,14 @@ WSGI_APPLICATION = 'biblioteca.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'biblioteca_bd',
+        'USER': 'admin',
+        'PASSWORD': 'y7ghOdLL5ixWFzB2BnasO5q4jJHgX7lU',
+        'HOST': 'dpg-crdqbt3v2p9s73clp1r0-a.oregon-postgres.render.com',
+        'PORT': '5432',
     }
 }
-
 
 # Password validation
 # https://docs.djangoproject.com/en/3.2/ref/settings/#auth-password-validators
