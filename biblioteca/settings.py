@@ -28,9 +28,20 @@ DEBUG = True
 
 ALLOWED_HOSTS = ['biblioteca-back.onrender.com', '127.0.0.1']
 
-ALLOW_ALL_ORIGINS = True
+CORS_ALLOW_ALL_ORIGINS = True
+# CORS
 
 CORS_ALLOWED_ORIGINS = ['https://biblioteca-back.onrender.com']
+
+CORS_ALLOW_METHODS = (
+    "DELETE",
+    "GET",
+    "OPTIONS",
+    "PATCH",
+    "POST",
+    "PUT",
+)
+
 # Application definition
 
 INSTALLED_APPS = [
