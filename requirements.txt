@@ -8,3 +8,4 @@ sqlparse==0.4.4
 tzdata==2024.1
 cors==1.0.1
 django-cors-headers==4.3.1
+psycopg2==2.9.9
