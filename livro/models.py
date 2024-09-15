@@ -1,6 +1,6 @@
 from django.db import models    
 from datetime import date
-from django.utils import timezone
+import datetime
 from django.db.models.base import Model
 from usuarios.models import Usuario
 
@@ -29,22 +29,21 @@ class Livros(models.Model):
         return self.nome
 
 class Emprestimos(models.Model):
-    ESCOLHAS = (
+    choices = (
         ('P', 'Péssimo'),
         ('R', 'Ruim'),
         ('B', 'Bom'),
         ('O', 'Ótimo')
     )
-    nome_emprestado = models.ForeignKey(Usuario, on_delete=models.DO_NOTHING, blank=True, null=True)
-    nome_emprestado_anonimo = models.CharField(max_length=30, blank=True, null=True)
-    data_emprestimo = models.DateTimeField(default=timezone.now)  # Use timezone.now() em vez de datetime.datetime.now()
-    data_devolucao = models.DateTimeField(blank=True, null=True)
+    nome_emprestado = models.ForeignKey(Usuario, on_delete=models.DO_NOTHING, blank = True, null = True)
+    nome_emprestado_anonimo = models.CharField(max_length = 30, blank = True, null = True)
+    data_emprestimo = models.DateTimeField(default=datetime.datetime.now())
+    data_devolucao = models.DateTimeField(blank = True, null = True)
     livro = models.ForeignKey(Livros, on_delete=models.DO_NOTHING)
-    avaliacao = models.CharField(max_length=50, choices=ESCOLHAS, null=False, blank=False, default="p")
+    avaliacao = models.CharField(max_length=1, choices=choices, null=True, blank=True)
 
     def __str__(self) -> str:
         return f"{self.nome_emprestado} | {self.livro}"
-
 
 
 
