@@ -102,21 +102,26 @@ def cadastrar_emprestimo(request):
         nome_emprestado = request.POST.get('nome_emprestado')
         nome_emprestado_anonimo = request.POST.get('nome_emprestado_anonimo')
         livro_emprestado = request.POST.get('livro_emprestado')
-        
+
+        # Criar o objeto de empréstimo
         if nome_emprestado_anonimo:
-            emprestimo = Emprestimos(nome_emprestado_anonimo = nome_emprestado_anonimo,
-                                    livro_id = livro_emprestado)
+            emprestimo = Emprestimos(nome_emprestado_anonimo=nome_emprestado_anonimo,
+                                    livro_id=livro_emprestado)
         else:
             emprestimo = Emprestimos(nome_emprestado_id=nome_emprestado,
-                                    livro_id = livro_emprestado)
-        emprestimo.save()
+                                    livro_id=livro_emprestado)
 
-        livro = Livros.objects.get(id = livro_emprestado)
+        avaliacao = request.POST.get('avaliacao')
+        if avaliacao:
+            emprestimo.avaliacao = avaliacao
+
+        emprestimo.save()
+        livro = Livros.objects.get(id=livro_emprestado)
         livro.emprestado = True
         livro.save()
 
-
         return redirect('/livro/home')
+
 
 def devolver_livro(request):
     id = request.POST.get('id_livro_devolver')
