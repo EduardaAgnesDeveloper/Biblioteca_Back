@@ -125,15 +125,20 @@ def cadastrar_emprestimo(request):
 
 def devolver_livro(request):
     id = request.POST.get('id_livro_devolver')
-    livro_devolver = Livros.objects.get(id = id)
+    livro_devolver = Livros.objects.get(id=id)
     livro_devolver.emprestado = False
     livro_devolver.save()
     
-    emprestimo_devolver = Emprestimos.objects.get(Q(livro = livro_devolver) & Q(data_devolucao = None) )
-    emprestimo_devolver.data_devolucao = datetime.now() 
-    emprestimo_devolver.save()
+    emprestimo_devolver = Emprestimos.objects.filter(
+        Q(livro=livro_devolver) & Q(data_devolucao=None)
+    ).first() 
+
+    if emprestimo_devolver:
+        emprestimo_devolver.data_devolucao = datetime.now()
+        emprestimo_devolver.save()
 
     return redirect('/livro/home')
+
 
 def alterar_livro(request):
     livro_id = request.POST.get('livro_id')
