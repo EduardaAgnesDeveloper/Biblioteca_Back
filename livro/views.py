@@ -81,8 +81,13 @@ def cadastrar_livro(request):
             return HttpResponse('DADOS INVÁLIDOS')
 
 def excluir_livro(request, id):
-    livro = Livros.objects.get(id = id).delete()
+    livro = Livros.objects.get(id=id)
+    emprestimos = Emprestimos.objects.filter(livro=livro)
+    if emprestimos.exists():
+        return HttpResponse('Não é possível excluir o livro, pois ele tem empréstimos associados.')
+    livro.delete()
     return redirect('/livro/home')
+
 
 def cadastrar_categoria(request):
     form = CategoriaLivro(request.POST)
