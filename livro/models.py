@@ -40,7 +40,8 @@ class Emprestimos(models.Model):
     data_devolucao = models.DateTimeField(blank=True, null=True)
     avaliacao = models.CharField(max_length=1, choices=choices, null=True, blank=True, default="B")
 
-    livro = models.ForeignKey(Livros, on_delete=models.CASCADE)
+    livro = models.ForeignKey(Livros, on_delete=models.SET_NULL, null=True)
+
 
     def __str__(self) -> str:
         return f"{self.nome_emprestado or self.nome_emprestado_anonimo} | {self.livro}"
